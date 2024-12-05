@@ -1,13 +1,29 @@
-import ToolTipButton from '@/components/ui/ToolTipButton'
-import { DarkModeIcon } from '@/icon'
-import React from 'react'
+import { DarkModeIcon, LightModeIcon } from "@/icon";
+import React, { useState } from "react";
 
 const ThemeChanger = () => {
+  const [isDark, setisDark] = useState(false)
   return (
-    <div>
-        <ToolTipButton className="shadow-lg" tooltipText="Dark Mode" icon={DarkModeIcon} onClick={()=>{}}/>
-    </div>
-  )
-}
+    <div className="tooltip" data-tip={`${isDark?'Dark Mode':'Light Mode'}`}>
+      <label className="swap swap-rotate btn btn-ghost btn-circle shadow-lg">
+        {/* this hidden checkbox controls the state */}
+        <input
+          type="checkbox"
+          className="theme-controller "
+          value="customdark"
+          onClick={()=>setisDark((prev)=>!prev)}
+        />
 
-export default ThemeChanger
+        {/* sun icon */}
+        <LightModeIcon />
+        {/* moon icon */}
+        <DarkModeIcon />
+      </label>
+    </div>
+  );
+};
+
+export default ThemeChanger;
+// <div>
+//     <ToolTipButton className="shadow-lg" tooltipText="Dark Mode" icon={DarkModeIcon} onClick={()=>{}}/>
+// </div>

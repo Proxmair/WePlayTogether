@@ -8,19 +8,6 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      colors: {
-        primary: "var(--color-primary)",
-        secondary: "var(--color-secondary)",
-        accent: "var(--color-accent)",
-        neutral: "var(--color-neutral)",
-        "base-100": "var(--color-base-100)",
-        "base-200": "var(--color-base-200)",
-        "base-300": "var(--color-base-300)",
-        info: "var(--color-info)",
-        success: "var(--color-success)",
-        warning: "var(--color-warning)",
-        error: "var(--color-error)",
-      },
       fontFamily: {
         sans: ["Poppins", "ui-sans-serif", "system-ui"],
         serif: ["Merriweather", "serif"],
@@ -29,5 +16,42 @@ const config: Config = {
     },
   },
   plugins: [require("daisyui")],
+  daisyui: {
+    themes: [
+      {
+        // Custom light theme
+        customlight: {
+          primary: "#a78bfa", // Example color
+          secondary: "#22d3ee",
+          accent: "#fbbf24",
+          neutral: "#3d4451",
+          "base-100": "#ffffff", // Background color
+          "base-200": "#f5f5f4", // Lighter background
+          "base-300": "#f3f4f6", // Even lighter
+          "info": "#3abff8",
+          "success": "#36d399",
+          "warning": "#fbbd23",
+          "error": "#f87272",
+        },
+      },
+      {
+        // Custom dark theme
+        customdark: {
+          primary: "#7e22ce",
+          secondary: "#2dd4bf",
+          accent: "#fcd34d",
+          neutral: "#1f2937",
+          "base-100": "#1e293b", // Dark background
+          "base-200": "#111827", // Even darker
+          "base-300": "#0f172a",
+          "info": "#0ea5e9",
+          "success": "#10b981",
+          "warning": "#facc15",
+          "error": "#ef4444",
+        },
+      },
+      
+    ],
+  },
 };
 export default config;

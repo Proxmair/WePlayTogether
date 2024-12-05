@@ -14,12 +14,36 @@ import ThemeChanger from './ThemeChanger'
 import FeedBackButton from './FeedBackButton'
 import LeaderBoardButton from './LeaderBoardButton'
 import { useRouter } from "next/navigation";
+
+import AuthModal from "./authModal/AuthModal";
+import ProfileDrawer from "./profileDrawer/ProfileDrawer"
+import { useDispatch, useSelector } from "react-redux";
+import { loadUser } from "@/services/authService";
+import { setUser } from "@/redux/slice/userSlice";
+import { useEffect } from "react";
+
 const Header = () => {
 
-  const isLogin = false
+  const isLoggedIn = useSelector((state: any)=>state.user.isLoggedIn)
+  const dispatch = useDispatch();
 
+  const handleLoadUser = async() => {
+    if(!isLoggedIn){
+      const response: any = await loadUser();
+      if (response.success) {
+        const user = response.data.data;
+        if(user) dispatch(setUser({ user }));
+      }
+    }
+  }
+  
+
+  useEffect(() => {
+    handleLoadUser();
+  }, [])
+  
   const gradientText = {
-    background: "radial-gradient(circle at center, #E805D1, #0B0C7E)",
+    background: "radial-gradient(circle at center, #E805D1, #8008AA)",
     WebkitBackgroundClip: "text",
     WebkitTextFillColor: "transparent",
   };
@@ -34,7 +58,7 @@ const Header = () => {
   return (
     <div className="navbar bg-base-100 p-5 md:p-8 lg:px-20 lg:py-10 shadow-lg">
       <div className="flex-1">
-        <a className="hover:cursor-pointer">
+        <a className="hover:cursor-pointer ">
           <div onClick={navigateToHome} className="flex-col justify-center items-center">
             <Image
               className="m-auto md:w-32 w-20"
@@ -54,11 +78,11 @@ const Header = () => {
       <div className="hidden lg:flex flex-none gap-3">
         <SearchBox />
         <ThemeChanger />
-        {isLogin && <ToolTipButton className="shadow-lg" tooltipText="Members" icon={MemberIcon} onClick={()=>{}}/>}
+        {isLoggedIn && <ToolTipButton className="shadow-lg" tooltipText="Members" icon={MemberIcon} onClick={()=>{}}/>}
         <FeedBackButton />
         <LeaderBoardButton />
-        {isLogin && <ToolTipButton className="shadow-lg" tooltipText="Notification" icon={NotificationIcon} onClick={()=>{}}/>}
-        <ToolTipButton className="shadow-lg" tooltipText="Login or Resiter" icon={LoginIcon} onClick={()=>{}}/>
+        {isLoggedIn && <ToolTipButton className="shadow-lg" tooltipText="Notification" icon={NotificationIcon} onClick={()=>{}}/>}
+        {isLoggedIn?<ProfileDrawer />:<AuthModal/>}
       </div>
       {/* For Small Screens */}
       <div className="flex lg:hidden flex-none gap-2">

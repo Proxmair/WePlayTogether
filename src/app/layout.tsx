@@ -39,7 +39,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" cz-shortcut-listen='true'>
       <body
         className={`${poppins.variable} antialiased`}
       >
