@@ -24,6 +24,3 @@ const ThemeChanger = () => {
 };
 
 export default ThemeChanger;
-// <div>
-//     <ToolTipButton className="shadow-lg" tooltipText="Dark Mode" icon={DarkModeIcon} onClick={()=>{}}/>
-// </div>

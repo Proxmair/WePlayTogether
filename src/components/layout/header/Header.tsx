@@ -1,7 +1,6 @@
 "use client"
 
 import {
-  LoginIcon,
   MemberIcon,
   MenuIcon,
   NotificationIcon,
